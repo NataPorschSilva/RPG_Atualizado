@@ -1,7 +1,8 @@
 com\mycompany\rpg\Inventario.class
+com\mycompany\rpg\Walkman.class
+com\mycompany\rpg\ELFA.class
 com\mycompany\rpg\VedaPerson.class
-com\mycompany\rpg\HUMANOS.class
+com\mycompany\rpg\Conexao.class
 com\mycompany\rpg\RPG.class
 com\mycompany\rpg\FalsePerson.class
-com\mycompany\rpg\ELFOS.class
 com\mycompany\rpg\Atributos.class

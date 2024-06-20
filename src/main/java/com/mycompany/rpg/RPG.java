@@ -1,4 +1,4 @@
-
+  
 package com.mycompany.rpg;
 
 import java.util.Scanner;
@@ -16,15 +16,40 @@ public class RPG {
     
     Atributos at = new Atributos();
     String a;
+    
     FalsePerson fp = new FalsePerson();
     VedaPerson vp = new VedaPerson();
+    Inventario inv = new Inventario(vp);
+    Walkman wal = new Walkman();
+    vp.setInventario(inv);
+    
+    //início do código "MENU"
     
     System.out.println("Bem-vindo ao VedaPerson!\n*[aperte enter]*");
     a = STRING.nextLine();
     
+    //ordem dos acontecimentos
     fp.fallperson();
-   
+    vp.xPerson();
     vp.bornPerson();
-        //System.out.println(at.toString()); depois usar
+    vp.pressagio();
     }
 }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+
+
+

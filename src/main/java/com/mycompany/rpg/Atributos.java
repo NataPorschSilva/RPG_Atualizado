@@ -4,20 +4,23 @@ package com.mycompany.rpg;
 /**
  *
  * @author Natã
+ * //mortos vivos ja estão mortos, faça algum metodo para acabar com eles de forma diferente.
  */
-public class Atributos {
-    protected int Força = 0;
-    protected int Velocidade = 0;
-    protected int Mana = 0;
-    protected int dinheiro = 0;
-    public boolean vivo;
-
-    public int getForça() {
-        return Força;
+public class Atributos extends RPG{
+    protected int Forca;
+    protected int Velocidade;
+    protected int Mana;
+    protected int dinheiro;
+    protected int vitalidade;
+    protected int inteligencia;
+    public boolean vivo; 
+    
+    public int getForca() {
+        return Forca;
     }
 
-    public void setForça(int Força) {
-        this.Força = Força;
+    public void setForca(int Forca) {
+        this.Forca = Forca;
     }
 
     public int getVelocidade() {
@@ -44,6 +47,22 @@ public class Atributos {
         this.dinheiro = dinheiro;
     }
 
+    public int getVitalidade() {
+        return vitalidade;
+    }
+
+    public void setVitalidade(int vitalidade) {
+        this.vitalidade = vitalidade;
+    }
+
+    public int getInteligencia() {
+        return inteligencia;
+    }
+
+    public void setInteligencia(int inteligencia) {
+        this.inteligencia = inteligencia;
+    }
+
     public boolean isVivo() {
         return vivo;
     }
@@ -52,12 +71,11 @@ public class Atributos {
         this.vivo = vivo;
     }
 
-    @Override
-    public String toString() {
-        return "Atributos{" + "For\u00e7a=" + Força + ", Velocidade=" + Velocidade + ", Mana=" + Mana + ", dinheiro=" + dinheiro + ", vivo=" + vivo + '}';
-    }
-    
-   
-
    
 }
+    
+    
+    
+    
+    
+   
