@@ -2,18 +2,16 @@ package com.mycompany.rpg;
 
 import java.util.Scanner;
 import java.util.Random;
+import java.sql.DriverManager; // biblioteca 
+
 
 /**
- *
  * @author aluno
  */
 public class Inventario extends Atributos {
 
     int resposta;
     int resposta1;
-    
-
-    private final VedaPerson vp;
 
     private boolean espada;
     private boolean espadaInfernal;
@@ -27,15 +25,15 @@ public class Inventario extends Atributos {
     private boolean livro;
     private boolean LivroSagrado;
 
-    protected int pocaoCura = 3;
-
-    public Inventario(VedaPerson vp) {
-        this.vp = vp;
-    }
+    
 
     //Mostra o inventário abaixo, o do personagem principal assim podendo desequipar e equipar
-    
+
     void equiparGuerreiro() {
+
+        int resposta = 0;
+
+        while (resposta != 6) {
 
         Scanner teclado = new Scanner(System.in);
 
@@ -49,198 +47,119 @@ public class Inventario extends Atributos {
 
         System.out.printf("\nDigite aqui: ");
 
-        String resposta = teclado.nextLine().toLowerCase();
+            resposta = teclado.nextInt();
 
-        switch (resposta) {
-            case "1":
-                System.out.println((espada ? "Você desquipou a espada! '-40 FORÇA'\n" : "Você equipou a espada! '+40 FORÇA'"));
-                espada();
-               
-                break;
-            case "2":
-                System.out.println((capacete ? "Você desequipou o capacete '-10 VITALIDADE'\n" : "Você equipou o capacete '+10 VITALIDADE'"));
-                capacete();
-                equiparGuerreiro();
-                break;
-            case "3":
-                System.out.println((peitoral ? "Você desequipou o peitoral '-20 VITALIDADE'\n" : "Você equipou o peitoral '+20 VITALIDADE'"));
-                peitoral();
-                equiparGuerreiro();
-                break;
-            case "4":
-                System.out.println((bota ? "Você desequipou a bota '-10 VITALIDADE' '-15 STAMINA'\n" : "Você equipou a bota '+10 VITALIDADE' '+15 STAMINA'"));
-                bota();
-                equiparGuerreiro();
-                break;
-            case "5":
-                System.out.println((livro ? "Você desequipou O livro '-50 INTELIGÊNCIA'\n" : "Você equipou o livro '+50 INTELIGÊNCIA'"));
-                livro();
-                equiparGuerreiro();
-                break;
-            case "6":
-                System.out.println("Você fechou o inventário\n");
-                vp.bornPerson();
-                break;
-
-            default:
-                System.out.println("Item não encontrado tente novamente!\n");
-                equiparGuerreiro();
-                break;
+            switch (resposta) {
+                case 1:
+                    System.out.println((espada ? "Você desquipou a espada! '-40 FORÇA'\n" : "Você equipou a espada! '+40 FORÇA'"));
+                    espada();
+                    break;
+                case 2:
+                    System.out.println((capacete ? "Você desequipou o capacete '-10 VITALIDADE'\n" : "Você equipou o capacete '+10 VITALIDADE'"));
+                    capacete();
+                    break;
+                case 3:
+                    System.out.println((peitoral ? "Você desequipou o peitoral '-20 VITALIDADE'\n" : "Você equipou o peitoral '+20 VITALIDADE'"));
+                    peitoral();
+                    break;
+                case 4:
+                    System.out.println((bota ? "Você desequipou a bota '-10 VITALIDADE' '-15 STAMINA'\n" : "Você equipou a bota '+10 VITALIDADE' '+15 STAMINA'"));
+                    bota();
+                    break;
+                case 5:
+                    System.out.println((livro ? "Você desequipou O livro '-50 INTELIGÊNCIA'\n" : "Você equipou o livro '+50 INTELIGÊNCIA'"));
+                    livro();
+                    
+                    break;
+                case 6:
+                    System.out.println("Você fechou o inventário\n");
+                    break;
+                default:
+                    System.out.println("Item não encontrado tente novamente!\n");
+                    break;
+            }
         }
     }
 
+    //ITENS DO INVENTÁRIO PRINCIPAL
+    
     public void espada() {
-        setForca((espada) ? (Forca =- 40) : (Forca =+ 40));
-        espada  =! espada;
-        equiparGuerreiro();
+        setForca((espada) ? (Forca = -40) : (Forca = +40));
+        espada = !espada;
     }
 
     public void capacete() {
-        //setVitalidade((capacete) ? (vitalidade -= 10) : (vitalidade += 10));
-        //capacete = !capacete;
-        if (capacete == true) {
-            capacete = false;
-            setVitalidade(vitalidade -= 10);
-
-        } else if (capacete == false) {
-            capacete = true;
-            setVitalidade(vitalidade += 10);
-        }
-     
+        setVitalidade((capacete) ? (vitalidade -= 10) : (vitalidade += 10));
+        capacete = !capacete;
     }
-
-    /**
-     * asklndasokdnaslkfbasdlkjfbasdfl
-     *
-     * @param algumaCoisa faça alguma coias aqui
-     * @param outraCoisa tira alguma coisa daqui
-     * @return Retorna "Nada hahaha
-     */
-    //<editor-fold defaultstate="collapsed" desc="Capacete">
-    /*public String Capacete(int algumaCoisa, String outraCoisa) {
-    //setVitalidade((capacete) ? (vitalidade -= 10) : (vitalidade += 10));
-    //capacete = !capacete;
-    if (capacete == true) {
-    capacete = false;
-    setVitalidade(vitalidade -= 10);
-    
-    } else if (capacete == false) {
-    capacete = true;
-    setVitalidade(vitalidade += 10);
-    }
-    return "Nada hahaha";
-    
-    }*/
-    //</editor-fold>
 
     public void peitoral() {
-        if (peitoral == true) {
-            peitoral = false;
-            setVitalidade(vitalidade -= 20);
-        } else if (peitoral == false) {
-            peitoral = true;
-            setVitalidade(vitalidade += 20);
-        }
-
+        setVitalidade((peitoral) ? (vitalidade -= 20) : (vitalidade += 20));
+        peitoral = !peitoral;
     }
 
     public void bota() {
-        if (bota == true) {
-            bota = false;
-            setVelocidade(Velocidade -= 20);
-        } else if (bota == false) {
-            bota = true;
-            setVelocidade(Velocidade += 20);
-        }
-
+        setVelocidade((bota) ? (Velocidade -= 20) : (Velocidade += 20));
+        bota = !bota;
     }
 
     public void livro() {
-
-        if (livro == true) {
-            livro = false;
-
-            setInteligencia(inteligencia -= 50);
-
-        } else if (livro == false) {
-            livro = true;
-            setInteligencia(inteligencia += 50);
-        }
+        setInteligencia((livro) ? (inteligencia -= 50) : (inteligencia += 50));
+        livro = !livro;
+        
     }
 
-   
-    /*/**
-    * lsaidfjaslkfnsdlkfansdf.l
-    *
-    /
-    void buff() {
-        
-        Random RANDOM = new Random();
-        
-    }*/
-    
-    
     // Elfa
     //fazer um sistema que ela tera dano mag e fis, e dependendo do item que voce roubar ela vai perder os atributos respectivos dos itens,
     //ela terá dois ataques um para cada tipo de dano e ela vai usá-los aleatóriamente; 
-    
+
     void espadaInfernal() {
         setForca((espadaInfernal) ? (Forca -= 550) : (Forca += 550));
         espadaInfernal = !espadaInfernal;
-     }
+    }
+
     void LivroSagrado() {
         setInteligencia((LivroSagrado) ? (inteligencia -= 550) : (inteligencia += 550));
         LivroSagrado = !LivroSagrado;
-     }
-    
-    
+    }
+
     void FadaEquip() {
 
         Scanner teclado = new Scanner(System.in);
         Random random = new Random();
 
         System.out.println("");
-               
-        System.out.println("Inventário da Elfa:\n\n"
-                + "(1)EspadaInfernal\n"
-                + "(2)LivroSagrado\n"
-                + "(3)Fechar Inventário\n"
-                + "tentar roubar ou quebrar qual item:");
-       
+
+        System.out.println("""
+                           Inventário de Miriel a Elfa:
+                           
+                           (1)EspadaInfernal
+                           (2)LivroSagrado
+                           (3)Fechar Inventário
+                           
+                           Tentar roubar ou quebrar qual item:(Beta)""");
+
         resposta = teclado.nextInt();
-        
+
         //adiantar batalha com a fada
-        
-        switch (resposta){
-           case 1:
-               String[] actions = {"roubou", "quebrou", "não conseguiu nd"}; 
-               int randomEspada = random.nextInt(actions.length);
-               String EscolherAcao = actions[randomEspada];
-               System.out.println("Você " + EscolherAcao);
-               break;
-        
-           case 2:
-               String[] actions2 = {"roubou", "quebrou", "não conseguiu nd"}; 
-               int randomLivro = random.nextInt(actions2.length);
-               String EscolherAcao1 = actions2[randomLivro];
-               System.out.println("Você " + EscolherAcao1);
-           default:
-               vp.bornPerson();
-               return;
-    }
-        
-        /*switch ("1"){
-            case "roubar":
-                 int randomRoubo = random.nextInt(actions.length);
-                 
-                 
-            case "quebrar":
-                 int randomQuebrar = random.nextInt(actions.length);
-                 
-                 
-            case "deixar":
-                
-        }*/
+
+        switch (resposta) {
+            case 1:
+                String[] actions = {"roubou", "quebrou", "não conseguiu nd"};
+                int randomEspada = random.nextInt(actions.length);
+                String EscolherAcao = actions[randomEspada];
+                System.out.println("Você " + EscolherAcao);
+                break;
+
+            case 2:
+                String[] actions2 = {"roubou", "quebrou", "não conseguiu nd"};
+                int randomLivro = random.nextInt(actions2.length);
+                String EscolherAcao1 = actions2[randomLivro];
+                System.out.println("Você " + EscolherAcao1);
+            default:
+                //vp.bornPerson();
+                return;
+        }
         
         
         
@@ -290,44 +209,18 @@ public class Inventario extends Atributos {
             default:
                 
             }*/
-        }
     }
-                
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /**
-     * Aqui vc escreve explicando oq o 'buff' vai fazer
-     * @param a koasndfakjsdnf
-     */
-   // void buff(int a) {
+}
 
-      //  Random RANDOM = new Random();
+
+/**
+ * Aqui vc escreve explicando oq o 'buff' vai fazer
+ *
+ * @param a koasndfakjsdnf
+ */
+// void buff(int a) {
+
+//  Random RANDOM = new Random();
 
     
 

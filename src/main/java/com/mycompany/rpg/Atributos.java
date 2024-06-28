@@ -1,22 +1,25 @@
-
 package com.mycompany.rpg;
+import java.sql.DriverManager; // biblioteca 
 
 /**
  *
- * @author Natã
- * //mortos vivos ja estão mortos, faça algum metodo para acabar com eles de forma diferente.
+ * @author Natã //mortos vivos ja estão mortos, faça algum metodo para acabar com eles de forma diferente.
  */
-public class Atributos extends RPG{
-    protected int Forca;
+public class Atributos {
+    
+    
+//--------------------------ATRIBUTOS-DO-PERSONAGEM-PRINCIPAL--------------------------------------
+    
+    public int Forca;
     protected int Velocidade;
     protected int Mana;
     protected int dinheiro;
     protected int vitalidade;
     protected int inteligencia;
-    public boolean vivo; 
-    
+    public boolean vivo;
+
     public int getForca() {
-        return Forca;
+        return this.Forca;
     }
 
     public void setForca(int Forca) {
@@ -24,7 +27,7 @@ public class Atributos extends RPG{
     }
 
     public int getVelocidade() {
-        return Velocidade;
+        return this.Velocidade;
     }
 
     public void setVelocidade(int Velocidade) {
@@ -32,7 +35,7 @@ public class Atributos extends RPG{
     }
 
     public int getMana() {
-        return Mana;
+        return this.Mana;
     }
 
     public void setMana(int Mana) {
@@ -40,7 +43,7 @@ public class Atributos extends RPG{
     }
 
     public int getDinheiro() {
-        return dinheiro;
+        return this.dinheiro;
     }
 
     public void setDinheiro(int dinheiro) {
@@ -48,7 +51,7 @@ public class Atributos extends RPG{
     }
 
     public int getVitalidade() {
-        return vitalidade;
+        return this.vitalidade;
     }
 
     public void setVitalidade(int vitalidade) {
@@ -56,7 +59,7 @@ public class Atributos extends RPG{
     }
 
     public int getInteligencia() {
-        return inteligencia;
+        return this.inteligencia;
     }
 
     public void setInteligencia(int inteligencia) {
@@ -64,18 +67,76 @@ public class Atributos extends RPG{
     }
 
     public boolean isVivo() {
-        return vivo;
+        return this.vivo;
     }
 
     public void setVivo(boolean vivo) {
         this.vivo = vivo;
     }
+ 
+//-------------------------ATRIBUTOS-DA-ELFA-----------------------------------------------
+    
+    public int ForcaELFA = 200;
+    protected int VelocidadeELFA = 100;
+    protected int ManaELFA = 100;
+    protected int dinheiroELFA = 1500;
+    protected int vitalidadeELFA = 500;
+    protected int inteligenciaELFA = 200;
+    public boolean vivoELFA;
 
-   
+    public int getForcaELFA() {
+        return Forca;
+    }
+
+    public void setForcaELFA(int Forca) {
+        this.Forca = Forca;
+    }
+
+    public int getVelocidadeELFA() {
+        return Velocidade;
+    }
+
+    public void setVelocidadeELFA(int Velocidade) {
+        this.Velocidade = Velocidade;
+    }
+
+    public int getManaELFA() {
+        return Mana;
+    }
+
+    public void setManaELFA(int Mana) {
+        this.Mana = Mana;
+    }
+
+    public int getDinheiroELFA() {
+        return dinheiro;
+    }
+
+    public void setDinheiroELFA(int dinheiro) {
+        this.dinheiro = dinheiro;
+    }
+
+    public int getVitalidadeELFA() {
+        return vitalidade;
+    }
+
+    public void setVitalidadeELFA(int vitalidade) {
+        this.vitalidade = vitalidade;
+    }
+
+    public int getInteligenciaELFA() {
+        return inteligencia;
+    }
+
+    public void setInteligenciaELFA(int inteligencia) {
+        this.inteligencia = inteligencia;
+    }
+
+    public boolean isVivoELFA() {
+        return vivo;
+    }
+
+    public void setVivoELFA(boolean vivo) {
+        this.vivo = vivo;
+    }
 }
-    
-    
-    
-    
-    
-   
