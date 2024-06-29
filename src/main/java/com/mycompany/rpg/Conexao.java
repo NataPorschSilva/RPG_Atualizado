@@ -10,9 +10,8 @@ import java.sql.SQLException; // serve para informar erros
  */
 public class Conexao {
    private static final String url = "jdbc:mysql://localhost:3306/rpg";
-    
    private static final String user = "root";
-   private static final String password = "";
+   private static final String password = "senacrs";
    
    private static Connection conn;
    

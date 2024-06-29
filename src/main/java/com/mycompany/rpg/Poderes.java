@@ -16,6 +16,8 @@ public class Poderes {
     private String nome;
     private int dano;
 
+    
+    
     public int getId() {
         return id;
     }

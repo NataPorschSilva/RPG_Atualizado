@@ -1,6 +1,6 @@
 package com.mycompany.rpg;
 
-import static com.mycompany.rpg.VedaPerson.inspecionar;
+//import static com.mycompany.rpg.VedaPerson.inspecionar;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Natã
@@ -16,24 +18,24 @@ import java.util.Scanner;
  * Walkman é usado para escutar musicas e dependedo da musica que tocar Aurora recebe algum buff em especifíco (walkman vindo de seu mundo passado e que aparentemente ela não se recorda de nada)
  */
 public class VedaPerson extends Inventario {
-    
+
     private Inventario inv;
     public Walkman wal;
-    
+
     Scanner resposta = new Scanner(System.in);
     String a;
     String c;
-    
+
     void xPerson() {
         System.out.println("Miriel: AURORA! Acorda!...Você está bem?");
-        
+
         String a = resposta.next().toLowerCase();
         if (a.equals("sim")) {
             System.out.println("que bom");
-            
+
         } else if (a.equals("não") || a.equals("nao")) {
             System.out.println("que merda");
-            
+
         } else {
             System.out.println("a vai tomar no cu");
         }
@@ -42,10 +44,10 @@ public class VedaPerson extends Inventario {
     //Começo das escolhas e história
     //O livro equipado lhe da informações que pessoas normais n tem 
     void bornPerson() {
-        
+
         String b = "";
         while (!b.equals("e")) {
-            
+
             System.out.println("""
                                                
                     Miriel: Pode equipar o Livro na mochila?"
@@ -56,7 +58,7 @@ public class VedaPerson extends Inventario {
                     d) Inventário da Elfa
                     e) *equipei!*""");
             b = resposta.next().toLowerCase();
-            
+
             switch (b) {
                 case "a":
                     equiparGuerreiro();
@@ -80,24 +82,24 @@ public class VedaPerson extends Inventario {
             }
         }
     }
-    
+
     public void pressagio() {
-        
+
         System.out.println("Miriel: Ufa então o que fiz n foi inútil...");
         System.out.println("Miriel: Por acaso se sente...'normal?'");
-        
+
         String c;
         c = resposta.next().toLowerCase();
-        
+
         if (c.equals("sim")) {
             System.out.println("Miriel: Wow incrível...\n");
-            
+
         } else if (c.equals("não") || c.equals("nao")) {
             System.out.println("Miriel: Como esperado...\n");
-            
+
         } else {
             System.out.println("Miriel: cuidado com suas palavras...\n");
-            
+
         }
         System.out.println("Miriel: O v0?d_ realmente é assustador...");
         System.out.println("Miriel: Que bom que está tudo bem agora com você\n"
@@ -105,9 +107,9 @@ public class VedaPerson extends Inventario {
                 + "Miriel: Sempre amei estar com você,\n"
                 + "você era a única que me entendia não é de se duvidar o porque era a próxima rainha ao trono...\n\n"
                 + "Miriel: Por acaso lembra dessa memórias lindas?\n");
-        
+
         c = resposta.next().toLowerCase();
-        
+
         if (c.equals("sim")) {
             System.out.println("Miriel: ...Você sempre foi uma mentirosa mesmo ahah...ahahaHAAHAHAHHAHAHAHAHAHAHA");
             antBatalha();
@@ -119,9 +121,9 @@ public class VedaPerson extends Inventario {
             antBatalha();
         }
     }
-    
+
     public void antBatalha() {
-        
+
         System.out.println("Miriel: Aiai é tão engraçado, você não tem ideia do passado ao até mesmo do que é não é mesmo?");
         System.out.println("Miriel: Esse livro nunca foi qualquer objeto mágico, ele é uma benção porém uma maldição para você, maldito.");
         System.out.println("Miriel: Com ele você pode até ver meus itens e poderes não é mesmo?");
@@ -129,11 +131,11 @@ public class VedaPerson extends Inventario {
     }
 
     // colocar os poderes da elfa no msql e puxar as informacoes dos dois ataques dela quanto 'investigar' as habilidades dela
-    public void batalha() throws SQLException {
-        
+    public void batalha() {
+
         String c = "";
         while (!c.equals("e")) {
-            
+
             System.out.println("""
                                                
                     Miriel: Vá em frente e faça o teste.
@@ -144,10 +146,17 @@ public class VedaPerson extends Inventario {
                     d) Inventário da Elfa
                     e) *vamos iníciar isso logo*""");
             c = resposta.next().toLowerCase();
-            
+
             switch (c) {
                 case "a":
-                    inspecionar();
+                {
+                    try {
+                        inspecionar();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(VedaPerson.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
                 case "b":
                     wal.Fortalecimento();
                 case "c":
@@ -165,8 +174,43 @@ public class VedaPerson extends Inventario {
             }
         }
     }
-    
-    private void inspecionar(Poderes poderes) throws SQLException { //criar classe poderes Poderes poderes
+
+    public void inspecionar() throws SQLException { //criar classe poderes Poderes poderes
+        try (Connection conn = Conexao.getConexao()) {
+            Statement stmt = conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery("SELECT * FROM poderes");
+
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt("id"));
+                System.out.println("Tipo: " + rs.getString("tipo"));
+                System.out.println("Nome: " + rs.getString("nome"));
+                System.out.println("Dano: : " + rs.getInt("dano"));
+                System.out.println("-----------------------------");
+            }
+
+        }
+
+    }
+
+//public void batalha(int indice) {
+//if (indice >= 0 && indice < poderes.size()) {
+//Poder poder = poderes.get(indice);
+//poder.usar();
+//} else {
+//System.out.println("Índice inválido!");
+//}
+//}
+    public void setInventario(Inventario inv) {
+
+        this.inv = inv;
+    }
+
+    public VedaPerson getVedaPerson() {
+        return this;
+    }
+
+    /*private void inspecionar() throws SQLException {
     Conexao c = new Conexao();
     try (Connection conn = c.getConexao()) {
     
@@ -182,42 +226,6 @@ public class VedaPerson extends Inventario {
     }
     
     }
-    
-    }
-
-//public void batalha(int indice) {
-//if (indice >= 0 && indice < poderes.size()) {
-//Poder poder = poderes.get(indice);
-//poder.usar();
-//} else {
-//System.out.println("Índice inválido!");
-//}
-//}
-public void setInventario(Inventario inv) {
-
-        this.inv = inv;
-    }
-
-    public VedaPerson getVedaPerson() {
-        return this;
-    }
-
-    private void inspecionar() throws SQLException {
-        Conexao c = new Conexao();
-    try (Connection conn = c.getConexao()) {
-    
-    String sql = "SELECT * FROM poderes";
-    Statement stmt = conn.createStatement();
-    ResultSet rs = stmt.executeQuery(sql);
-    
-    if (rs.next()) {
-    int id = rs.getInt("id");
-    String tipo = rs.getString("tipo");
-    String nome = rs.getString("nome");
-    int dano = rs.getInt("dano");
-    }
-    
-    }
-    }
+    }*/
 
 }

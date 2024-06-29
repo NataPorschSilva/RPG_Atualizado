@@ -4,48 +4,42 @@ import java.util.Scanner;
 import java.util.Random;
 import java.sql.DriverManager; // biblioteca 
 
-
 /**
  * @author aluno
  */
 public class Inventario extends Atributos {
 
+    private String nome;
     int resposta;
-    int resposta1;
-
-    private boolean espada;
-    private boolean espadaInfernal;
-
-    private boolean capacete;
-
-    private boolean peitoral;
-
-    private boolean bota;
-
-    private boolean livro;
-    private boolean LivroSagrado;
-
+    protected boolean espada;
+    protected boolean espadaInfernal;
+    protected boolean capacete;
+    protected boolean peitoral;
+    protected boolean bota;
+    protected boolean livro;
+    protected boolean LivroSagrado;
+    private int forcaBonus;
+    private int inteligenciaBonus;
     
 
     //Mostra o inventário abaixo, o do personagem principal assim podendo desequipar e equipar
-
     void equiparGuerreiro() {
 
         int resposta = 0;
 
         while (resposta != 6) {
 
-        Scanner teclado = new Scanner(System.in);
+            Scanner teclado = new Scanner(System.in);
 
-        System.out.println("Inventario:\n\n"
-                + (espada ? "(1) Espada 'EQUIPADO'" : "(1) Espada")
-                + (capacete ? "\n(2) Capacete 'EQUPADO'" : "\n(2) Capacete")
-                + (peitoral ? "\n(3) Peitoral 'EQUIPADO'" : "\n(3) Peitoral")
-                + (bota ? "\n(4) Bota 'EQUIPADO'" : "\n(4) Bota")
-                + (livro ? "\n(5) Livro 'EQUIPADO'" : "\n(5) Livro")
-                + "\n\n(6) Fechar inventario");
+            System.out.println("Inventario:\n\n"
+                    + (espada ? "(1) Espada 'EQUIPADO'" : "(1) Espada")
+                    + (capacete ? "\n(2) Capacete 'EQUPADO'" : "\n(2) Capacete")
+                    + (peitoral ? "\n(3) Peitoral 'EQUIPADO'" : "\n(3) Peitoral")
+                    + (bota ? "\n(4) Bota 'EQUIPADO'" : "\n(4) Bota")
+                    + (livro ? "\n(5) Livro 'EQUIPADO'" : "\n(5) Livro")
+                    + "\n\n(6) Fechar inventario");
 
-        System.out.printf("\nDigite aqui: ");
+            System.out.printf("\nDigite aqui: ");
 
             resposta = teclado.nextInt();
 
@@ -69,7 +63,7 @@ public class Inventario extends Atributos {
                 case 5:
                     System.out.println((livro ? "Você desequipou O livro '-50 INTELIGÊNCIA'\n" : "Você equipou o livro '+50 INTELIGÊNCIA'"));
                     livro();
-                    
+
                     break;
                 case 6:
                     System.out.println("Você fechou o inventário\n");
@@ -80,7 +74,8 @@ public class Inventario extends Atributos {
             }
         }
     }
-
+//------------------------------------------------------------------------------------------
+    
     //ITENS DO INVENTÁRIO PRINCIPAL
     
     public void espada() {
@@ -108,10 +103,10 @@ public class Inventario extends Atributos {
         livro = !livro;
         
     }
-
-    // Elfa
-    //fazer um sistema que ela tera dano mag e fis, e dependendo do item que voce roubar ela vai perder os atributos respectivos dos itens,
-    //ela terá dois ataques um para cada tipo de dano e ela vai usá-los aleatóriamente; 
+    
+    //------------------------------------------------------------------------------------------
+    
+    //ITENS DA ELFA    
 
     void espadaInfernal() {
         setForca((espadaInfernal) ? (Forca -= 550) : (Forca += 550));
@@ -122,6 +117,21 @@ public class Inventario extends Atributos {
         setInteligencia((LivroSagrado) ? (inteligencia -= 550) : (inteligencia += 550));
         LivroSagrado = !LivroSagrado;
     }
+    
+    //-----------------------------------------------------------------------------------------
+    
+    //MÉTODOS
+    
+    public void equipar(Inventario inv){
+    inv.setForca(inv.getForca() + forcaBonus);
+    inv.setInteligencia(inv.getInteligencia() + inteligenciaBonus);
+    }
+
+//---------------------------------------------------------------------------------------------
+    
+    // Elfa
+    //fazer um sistema que ela tera dano mag e fis, e dependendo do item que voce roubar ela vai perder os atributos respectivos dos itens,
+    //ela terá dois ataques um para cada tipo de dano e ela vai usá-los aleatóriamente; 
 
     void FadaEquip() {
 
@@ -142,7 +152,6 @@ public class Inventario extends Atributos {
         resposta = teclado.nextInt();
 
         //adiantar batalha com a fada
-
         switch (resposta) {
             case 1:
                 String[] actions = {"roubou", "quebrou", "não conseguiu nd"};
@@ -160,33 +169,7 @@ public class Inventario extends Atributos {
                 //vp.bornPerson();
                 return;
         }
-        
-        
-        
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         /*System.out.println("Inventario Fada:\n\n"
                 + (espadaInfernal ? "(1) Espada 'EQUIPADO'" : "(1) Espada")
                 + "\n\n(6) Fechar inventario");
@@ -212,15 +195,11 @@ public class Inventario extends Atributos {
     }
 }
 
-
 /**
  * Aqui vc escreve explicando oq o 'buff' vai fazer
  *
  * @param a koasndfakjsdnf
  */
 // void buff(int a) {
-
 //  Random RANDOM = new Random();
-
-    
 
